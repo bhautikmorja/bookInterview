@@ -23,4 +23,24 @@ const getBook = async (req, res) => {
   }
 };
 
-module.exports = { addBook, getBook };
+const removeBook = async (req, res) => {
+  try {
+    await Book.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "Book removed" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const updateBook = async (req, res) => {
+  try {
+    const updateBook = await Book.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    res.status(200).json({ message: "Book updated", updateBook });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { addBook, getBook, removeBook, updateBook };

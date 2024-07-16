@@ -31,4 +31,8 @@ router.post("/book", userController.secure, bookController.addBook);
 
 router.get("/book/:id", userController.secure, bookController.getBook);
 
+router.delete("/book/:id", userController.secure, bookController.removeBook);
+
+router.put("/book/:id", userController.secure, bookController.updateBook);
+
 module.exports = router;
